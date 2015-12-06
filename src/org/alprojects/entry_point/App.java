@@ -17,14 +17,27 @@ public class App {
 	 */
 	public static void main(String[] args) throws RecognitionException {
 		// TODO Auto-generated method stub
-		CharStream stm = new ANTLRStringStream( "-1 + 3 * 15 + (1+2) * - ( -8 + 123 )" );
+		// CharStream stm = new ANTLRStringStream( "-1 + 3 * 15 + (1+2) * - ( -8 + 123 )" );
+		// CharStream stm = new ANTLRStringStream( "(1+3) - 8 * ( (-2+4) + 11 ) * 9" );
+		
+		if ( args.length != 1 )
+		{
+			System.err.println( "Please provide math expression with integer vales" );
+			System.err.println( "Example: \"-1 + 3 * 15 + (1+2) * - ( -8 + 123 )\"" );
+			System.exit(1);
+		}
+		
+		System.out.println( args[0] );
+		
+		CharStream stm = new ANTLRStringStream( args[0] );
+		
 		SampleLexer sl = new SampleLexer( stm );
 		TokenStream ts = new CommonTokenStream(sl);
 		SampleParser sp = new SampleParser(ts);
 		
 		double rv = sp.rule();
 		System.out.println( "done" );
-		System.out.println( "rv is : " + Double.toString(rv) );
+		System.out.println( "result is : " + Double.toString(rv) );
 	}
 
 }
